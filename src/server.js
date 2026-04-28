@@ -8,6 +8,9 @@ const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const skillRoutes = require("./routes/skillRoutes");
 const userSkillRoutes = require("./routes/userSkillRoutes");
+const requestRoutes = require("./routes/requestRoutes");
+const { getByUser } = require("./controllers/requestController");
+const { authenticate } = require("./middleware/authMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +24,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/users/:id/skills", userSkillRoutes);
+app.use("/api/requests", requestRoutes);
+app.get("/api/users/:id/requests", authenticate, getByUser);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

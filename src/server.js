@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const skillRoutes = require("./routes/skillRoutes");
 const userSkillRoutes = require("./routes/userSkillRoutes");
 const requestRoutes = require("./routes/requestRoutes");
+const matchRoutes = require("./routes/matchRoutes");
 const { getByUser } = require("./controllers/requestController");
 const { authenticate } = require("./middleware/authMiddleware");
 
@@ -26,6 +27,7 @@ app.use("/api/skills", skillRoutes);
 app.use("/api/users/:id/skills", userSkillRoutes);
 app.use("/api/requests", requestRoutes);
 app.get("/api/users/:id/requests", authenticate, getByUser);
+app.use("/api/matches", matchRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
